@@ -1,0 +1,3 @@
+pip install psycopg2-binary
+pip install schedule
+pip install loguru  # Or any logging library you like
