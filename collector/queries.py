@@ -1,10 +1,11 @@
 # collector/queries.py
 
 ACTIVE_CONNECTION = """
-SELECT state, count(*) 
+SELECT count(*)
 FROM pg_stat_activity
 WHERE datname = %s
-GROUP BY state;
+  AND state = 'active';
+
 """
 
 IDLE_IN_TRANSACTION_CONNECTIONS = """
@@ -13,10 +14,9 @@ FROM pg_stat_activity
 WHERE state = 'idle in transaction';
 """
 
-DATABASE_SIZE = """ 
-                SELECT datname, pg_database_size(datname) 
-                    FROM pg_database; 
-                """
+DATABASE_SIZE = """
+SELECT pg_database_size(%s);
+"""
 
 # Complex metrics (will become JSON)
 BGWITER_STATS = """
