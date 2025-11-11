@@ -7,6 +7,12 @@ logger = setup_logger()
 _prev_io_counters = None
 
 def collect_system_metrics():
+    """
+    CPU usage: cpu_percent(interval=1) — measures CPU load over 1 second.
+Memory usage: .virtual_memory().percent — % of RAM in use.
+Disk usage: .disk_usage('/').percent — % used on root partition.
+Disk I/O: .disk_io_counters() — total bytes read/written since boot. function gives disk usage statistics as a tuple for a given path. Total, used and free space are expressed in bytes, along with the percentage usage.
+"""
     global _prev_io_counters
     try:
         cpu = psutil.cpu_percent(interval=0)

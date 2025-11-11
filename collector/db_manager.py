@@ -9,6 +9,7 @@ def initialize_db():
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
+                # For Database matrics
                 cur.execute("""
                             CREATE TABLE IF NOT EXISTS metrics_raw(
                                 id BIGSERIAL PRIMARY KEY,
